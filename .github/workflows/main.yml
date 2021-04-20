@@ -18,6 +18,7 @@ jobs:
         APP_NAME: ${{ 'shpchatroom' }}
       run: |
         docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-        docker build -t $APP_NAME -f ./Chatroom/Dockerfile .
+        cd ./Chatroom
+        docker build -t $APP_NAME -f Dockerfile .
         heroku container:push web -a $APP_NAME
         heroku container:release web -a $APP_NAME

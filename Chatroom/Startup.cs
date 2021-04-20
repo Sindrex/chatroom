@@ -2,10 +2,9 @@ using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WiredBrain.Helpers;
-using WiredBrain.Hubs;
+using Chatroom.Hubs;
 
-namespace WiredBrain
+namespace Chatroom
 {
     public class Startup
     {
@@ -15,7 +14,6 @@ namespace WiredBrain
         {
             services.AddControllers();
             services.AddSingleton(new Random());
-            services.AddSingleton<OrderChecker>();
             services.AddHttpContextAccessor();
             services.AddSignalR(c =>
             {
@@ -37,7 +35,7 @@ namespace WiredBrain
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<CoffeeHub>("/coffeehub");
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }

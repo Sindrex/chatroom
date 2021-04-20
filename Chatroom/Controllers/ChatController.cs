@@ -6,38 +6,37 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using WiredBrain.Helpers;
-using WiredBrain.Hubs;
-using WiredBrain.Models;
+using Chatroom.Hubs;
+using Chatroom.Models;
 
-namespace WiredBrain.Controllers
+namespace Chatroom.Controllers
 {
     [Route("[controller]")]
-    public class CoffeeController : Controller
+    public class ChatController : Controller
     {
-        private readonly OrderChecker _orderChecker;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IHubContext<CoffeeHub> _coffeeHub;
+        private readonly IHubContext<ChatHub> _chatHub;
 
-        public CoffeeController(OrderChecker orderChecker, IHttpContextAccessor httpContextAccessor, IHubContext<CoffeeHub> coffeeHub)
+        public ChatController(IHttpContextAccessor httpContextAccessor, IHubContext<ChatHub> coffeeHub)
         {
-            _orderChecker = orderChecker;
             _httpContextAccessor = httpContextAccessor;
-            _coffeeHub = coffeeHub;
+            _chatHub = coffeeHub;
         }
 
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> OrderCoffee([FromBody] Order order)
+        public async Task<IActionResult> SendChatMessage([FromBody] ChatMessage message)
         {
-            Console.WriteLine($"CoffeeController:OrderCoffee(order={order.Product},{order.Size})");
+            Console.WriteLine($"ChatController: SendChatMessage: message={message}");
             //Start process for order
-            await _coffeeHub.Clients.All.SendAsync("NewOrder", order);
+            //await _chatHub.Clients.All.SendAsync("NewOrder", order);
+            await Task.Delay(1);
             //save order somewhere and get order id
-            Console.WriteLine($"CoffeeController: OrderCoffee: Returning accept now!");
+            Console.WriteLine($"ChatController: SendChatMessage: Returning accept now!");
             return Accepted(1); //return order id 1
         }
 
+        /*
         [HttpGet("{orderNo}")]
         public async void GetUpdateForOrder(int orderNo)
         {
@@ -76,6 +75,6 @@ namespace WiredBrain.Controllers
                     endOfMessage: true,
                     cancellationToken: CancellationToken.None);
             } while (!result.Finished);
-        }
+        }*/
     }
 }

@@ -6,26 +6,23 @@ let connection = null;
 
 setupConnection = () => {
     connection = new signalR.HubConnectionBuilder()
-        .withUrl("/coffeehub")
+        .withUrl("/chathub")
         .build();
 
-    connection.on("ReceiveOrderUpdate", (update) => {
-        console.log("ReceiveOrderUpdate");
-        const statusDiv = document.getElementById("status");
-        statusDiv.innerHTML = update;
-    }
-    );
+    connection.on("RecieveMessage", (update) => {
+        console.log("RecieveMessage", update);
 
-    connection.on("NewOrder", function (order) {
-        console.log("NewOrder");
-        var statusDiv = document.getElementById("status");
-        statusDiv.innerHTML = "Someone ordered an " + order.product;
-    }
-    );
+        let stringified = update.author + ": " + update.message;
 
-    connection.on("Finished", function () {
-        console.log("Finished");
-        //connection.stop().catch(err => console.error(err.toString()));
+        console.log("Stringified=", stringified);
+        console.log("blah blah blah=");
+
+        let newDiv = document.createElement("li");
+        newDiv.id = 'messageItem';
+        newDiv.setAttribute("id", "messageItem");
+        newDiv.innerHTML = stringified;
+        const currentDiv = document.getElementById("entrypoint");
+        currentDiv.after(newDiv);
     }
     );
 
@@ -37,17 +34,32 @@ setupConnection();
 
 document.getElementById("submit").addEventListener("click", e => {
     e.preventDefault();
-    const product = document.getElementById("product").value;
-    const size = document.getElementById("size").value;
+    const author = document.getElementById("author").value;
+    const messageInput = document.getElementById("message");
+    const message = messageInput.value;
+    messageInput.value = "";
 
-    fetch("/Coffee",
+    const obj = {
+        Author: author,
+        Message: message
+    }
+    console.log("Sending: ", obj);
+
+
+    connection.invoke("SendChatMessage", obj);
+    /*
+    fetch("/Chat",
         {
             method: "POST",
-            body: JSON.stringify({ product, size }),
+            body: obj,
             headers: {
                 'content-type': 'application/json'
             }
         })
         .then(response => response.text())
-        .then(id => connection.invoke("GetUpdateForOrder", parseInt(id)));
+        .then(id => {
+            console.log(obj);
+            connection.invoke("SendChatMessage", obj);
+        });
+    */
 });

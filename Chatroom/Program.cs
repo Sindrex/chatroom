@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace WiredBrain
+namespace Chatroom
 {
     public class Program
     {

@@ -12,6 +12,11 @@ COPY . .
 WORKDIR "/src/."
 RUN dotnet build "Chatroom.csproj" -c Release -o /app/build
 
+WORKDIR "./ClientApp"
+COPY package*.json ./
+RUN npm install
+WORKDIR "../"
+
 FROM build AS publish
 RUN dotnet publish "Chatroom.csproj" -c Release -o /app/publish
 

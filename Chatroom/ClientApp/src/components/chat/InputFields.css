@@ -4,5 +4,5 @@
     margin-right: auto;
     width: 80%; /* 100% of page width */
     padding: 0 15px 15px 15px; /* standard edge margin (15px) */
-    height: 250px; /* space for input height (38px) + bottom padding (15px) */
+    height: 150px; /* space for input height (38px) + bottom padding (15px) */
 }

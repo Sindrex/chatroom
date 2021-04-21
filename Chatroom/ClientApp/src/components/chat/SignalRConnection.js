@@ -27,7 +27,7 @@ export function SendMessage(e) {
     const author = document.getElementById("author").value;
     const messageInput = document.getElementById("message");
     const message = messageInput.value;
-    messageInput.value = "";
+    //messageInput.value = "";
 
     if (!author || !message) return;
 

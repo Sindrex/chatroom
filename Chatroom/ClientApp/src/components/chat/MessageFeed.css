@@ -1,0 +1,14 @@
+#messageFeed {
+    height: 65%;
+    width: 75%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    margin: auto;
+}
+
+div.font-weight-bold {
+    text-align: right;
+}

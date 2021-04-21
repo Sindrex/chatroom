@@ -1,0 +1,11 @@
+#container {
+    width: 60%;
+    height: 100vh;
+    bottom: 0;
+    margin: auto;
+}
+
+#header {
+    padding-top: 50px;
+    text-align: center;
+}

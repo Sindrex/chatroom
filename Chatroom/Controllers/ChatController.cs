@@ -11,6 +11,7 @@ using Chatroom.Models;
 
 namespace Chatroom.Controllers
 {
+    [ApiController]
     [Route("[controller]")]
     public class ChatController : Controller
     {
@@ -21,6 +22,14 @@ namespace Chatroom.Controllers
         {
             _httpContextAccessor = httpContextAccessor;
             _chatHub = coffeeHub;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            Console.WriteLine($"ChatController: Get");
+            await Task.Delay(1);
+            return Accepted(1);
         }
 
         [HttpPost]

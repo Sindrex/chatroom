@@ -12,10 +12,12 @@ COPY . .
 WORKDIR "/src/."
 RUN dotnet build "Chatroom.csproj" -c Release -o /app/build
 
-WORKDIR "./ClientApp"
-COPY package*.json ./
-RUN npm install
-WORKDIR "../"
+# install NodeJS 13.x
+# see https://github.com/nodesource/distributions/blob/master/README.md#deb
+RUN apt-get update -yq 
+RUN apt-get install curl gnupg -yq 
+RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
+RUN apt-get install -y nodejs
 
 FROM build AS publish
 RUN dotnet publish "Chatroom.csproj" -c Release -o /app/publish

@@ -22,7 +22,8 @@ export function SetupMessageReciever(func){
     });
 }
 
-export function SendMessage() {
+export function SendMessage(e) {
+    e.preventDefault();
     const author = document.getElementById("author").value;
     const messageInput = document.getElementById("message");
     const message = messageInput.value;

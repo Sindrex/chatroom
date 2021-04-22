@@ -28,9 +28,9 @@ export class MessageFeed extends Component {
     render() {
         const messageList = this.state.messages.map((message, i) =>
             <li key={i}>
-                <Container><Row>
-                    <Col><div className="font-weight-bold">[{message.author}]:</div></Col>
-                    <Col xs={8}>{message.message}</Col>
+                <Container fluid><Row>
+                    <Col md="auto"><div className="font-weight-bold">[{message.author}]:</div></Col>
+                    <Col>{message.message}</Col>
                 </Row></Container>
             </li>
         );

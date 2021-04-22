@@ -20,6 +20,24 @@ namespace Chatroom.Hubs
             await Clients.All.RecieveMessage(message);
             Console.WriteLine($"ChatHub: SendChatMessage: Finished now!");
         }
+        public async Task OnEnterChat(string author)
+        {
+            var connectionid = Context.ConnectionId;
+            await Clients.All.RecieveOneConnected(new AuthorRegister
+            {
+                Author = author, 
+                ConnectionId = connectionid
+            });
+        }
+        public async Task SyncAuthors(string author)
+        {
+            var connectionid = Context.ConnectionId;
+            await Clients.Others.RecieveOneSync(new AuthorRegister
+            {
+                Author = author,
+                ConnectionId = connectionid
+            });
+        }
         /*
         public override async Task OnConnectedAsync()
         {
@@ -27,5 +45,11 @@ namespace Chatroom.Hubs
             await Clients.Client(connectionid).SendAsync
         }
         */
+
+        public override async Task OnDisconnectedAsync(Exception exception)
+        {
+            var connectionid = Context.ConnectionId;
+            await Clients.Others.RecieveOneDisconnected(connectionid);
+        }
     }
 }

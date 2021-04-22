@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SendMessage } from './SignalRConnection';
+import { SendMessage, SetupConnectedReciever, SyncAuthor, OnEnterChat } from './SignalRConnection';
 import Container from 'react-bootstrap/Container';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,42 +9,92 @@ import './InputFields.css'
 
 export class InputFields extends Component {
     static displayName = InputFields.name;
+    state = {
+        author: "Anonymous",
+        named: false,
+        authorVal: "",
+        messageVal: ""
+    }
 
     constructor() {
         super();
+        SetupConnectedReciever((update) => {
+            if (this.state.named) SyncAuthor(this.state.author);
+        });
     }
 
-    render () {
-        return (
-            <div id="foot">
-                <form onSubmit={this.OnSendMessage}>
-                    <Container>
-                        <Row className="align-items-center">
-                            <Col xs={4}>
-                                <input type="text" id="author" className="form-control" placeholder="Your name here..." required/>
-                            </Col>
-                            <Col xs={6}>
-                                <input type="text" id="message" className="form-control" placeholder="Write a message and press Enter..." required/>
-                            </Col>
-                            <Col>
-                                <Button id="submit" type="submit" className="btn btn-primary">
-                                    Send
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </form>
-            </div>
-        );
+    render() {
+        if (this.state.named) {
+            return (
+                <div id="foot">
+                    <form onSubmit={this.OnSendMessage} autocomplete="off">
+                        <Container fluid>
+                            <Row className="align-items-center">
+                                <Col md="auto">
+                                    <div className="font-weight-bold">[{this.state.author}]:</div>
+                                </Col>
+                                <Col>
+                                    <input type="text" id="message" className="form-control" value={this.state.messageVal} onChange={(e) => {
+                                            this.setState({
+                                                messageVal: e.target.value,
+                                            });
+                                        }}
+                                        placeholder="Write a message and press Enter..." required />
+                                </Col>
+                                <Col md="auto">
+                                    <Button id="submit" type="submit" className="btn btn-primary">
+                                        Send
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </form>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div id="foot">
+                    <form onSubmit={this.onPickName}>
+                        <Container fluid>
+                            <Row className="align-items-center">
+                                <Col>
+                                    <input type="username" id="author" className="form-control" value={this.state.authorVal} onChange={(e) => {
+                                        this.setState({
+                                            authorVal: e.target.value,
+                                        });
+                                    }} placeholder="Your name here..." required />
+                                </Col>
+                                <Col md="auto">
+                                    <Button id="submit" type="submit" className="btn btn-primary">
+                                        Send
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </form>
+                </div>
+            );
+        }
     }
 
-    OnSendMessage(e) {
+    OnSendMessage = (e) => {
         e.preventDefault();
-        const author = document.getElementById("author").value;
-        const messageInput = document.getElementById("message");
-        const message = messageInput.value;
-        SendMessage(e, author, message);
+        const author = this.state.author;
+        const message = this.state.messageVal;
+        SendMessage(author, message);
 
-        document.getElementById("message").value = "";
+        this.setState({
+            messageVal: "",
+        });
+    }
+
+    onPickName = (e) => {
+        e.preventDefault();
+        this.setState({
+            author: this.state.authorVal,
+            named: true
+        });
+        OnEnterChat(this.state.authorVal);
     }
 }

@@ -22,9 +22,28 @@ export function SetupMessageReciever(func){
     });
 }
 
-export function SendMessage(e, author, message) {
-    e.preventDefault();
+export function SetupConnectedReciever(func) {
+    connection.on("RecieveOneConnected", (update) => {
+        console.log("RecieveOneConnected", update);
+        func(update);
+    });
+}
 
+export function SetupSyncReciever(func) {
+    connection.on("RecieveOneSync", (update) => {
+        console.log("RecieveOneSync", update);
+        func(update);
+    });
+}
+
+export function SetupDisconnectedReciever(func) {
+    connection.on("RecieveOneDisconnected", (update) => {
+        console.log("RecieveOneDisconnected", update);
+        func(update);
+    });
+}
+
+export function SendMessage(author, message) {
     if (!author || !message) return;
 
     const obj = {
@@ -34,4 +53,16 @@ export function SendMessage(e, author, message) {
     console.log("Sending: ", obj);
 
     connection.invoke("SendChatMessage", obj);
+}
+
+export function OnEnterChat(author) {
+    console.log("Entering chat: ", author);
+
+    connection.invoke("OnEnterChat", author);
+}
+
+export function SyncAuthor(author) {
+    console.log("Syncing: ", author);
+
+    connection.invoke("SyncAuthors", author);
 }

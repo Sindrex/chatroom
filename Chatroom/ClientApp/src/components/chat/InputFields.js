@@ -13,14 +13,14 @@ export class InputFields extends Component {
     render () {
         return (
             <div id="foot">
-                <form onSubmit={SendMessage}>
+                <form onSubmit={this.OnSendMessage}>
                     <Container>
                         <Row className="align-items-center">
                             <Col xs={4}>
                                 <input type="text" id="author" className="form-control" placeholder="Your name here..." required/>
                             </Col>
                             <Col xs={6}>
-                                <input type="text" id="message" className="form-control" placeholder="Write a message and press Enter..." required/>
+                                <input type="text" id="message" className="form-control" placeholder="Write a message and press Enter..." required />
                             </Col>
                             <Col>
                                 <Button id="submit" type="submit" className="btn btn-primary">
@@ -32,5 +32,14 @@ export class InputFields extends Component {
                 </form>
             </div>
         );
+    }
+
+    OnSendMessage(e) {
+        e.preventDefault();
+        const author = document.getElementById("author").value;
+        const messageInput = document.getElementById("message");
+        const message = messageInput.value;
+        messageInput.value = "";
+        SendMessage(e, author, message);
     }
 }

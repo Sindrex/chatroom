@@ -9,6 +9,7 @@ namespace Chatroom.Hubs
     public interface IChatClient
     {
         Task RecieveMessage(ChatMessage message);
+        Task RecieveMessageHistory(ChatMessage[] messages);
         Task RecieveOneConnected(AuthorRegister author);
         Task RecieveOneSync(AuthorRegister author);
         Task RecieveOneDisconnected(string connectionid);

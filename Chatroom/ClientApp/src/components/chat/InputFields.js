@@ -27,11 +27,11 @@ export class InputFields extends Component {
         if (this.state.named) {
             return (
                 <div id="foot">
-                    <form onSubmit={this.OnSendMessage} autocomplete="off">
+                    <form onSubmit={this.OnSendMessage} autoComplete="off">
                         <Container fluid>
                             <Row className="align-items-center">
-                                <Col md="auto">
-                                    <div className="font-weight-bold">[{this.state.author}]:</div>
+                                <Col xs={2}>
+                                    <div className="font-weight-bold" id="right-align-text">[{this.state.author}]:</div>
                                 </Col>
                                 <Col>
                                     <input type="text" id="message" className="form-control" value={this.state.messageVal} onChange={(e) => {
@@ -39,7 +39,7 @@ export class InputFields extends Component {
                                                 messageVal: e.target.value,
                                             });
                                         }}
-                                        placeholder="Write a message and press Enter..." required />
+                                        placeholder="Write a message and press Enter..." maxLength="140" required />
                                 </Col>
                                 <Col md="auto">
                                     <Button id="submit" type="submit" className="btn btn-primary">
@@ -63,7 +63,7 @@ export class InputFields extends Component {
                                         this.setState({
                                             authorVal: e.target.value,
                                         });
-                                    }} placeholder="Your name here..." required />
+                                    }} placeholder="Your name here..." maxLength="18" required />
                                 </Col>
                                 <Col md="auto">
                                     <Button id="submit" type="submit" className="btn btn-primary">

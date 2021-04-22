@@ -16,12 +16,19 @@ namespace Chatroom.Hubs
         public async Task SendChatMessage(ChatMessage message)
         {
             Console.WriteLine($"ChatHub: SendChatMessage: message={message}");
-            //await Clients.Caller.SendAsync("ReceiveOrderUpdate", result.Update);
             await Clients.All.RecieveMessage(message);
-            Console.WriteLine($"ChatHub: SendChatMessage: Finished now!");
+        }
+        public async Task SendChatMessageHistory(ChatMessage[] messages, string connectionId)
+        {
+            Console.WriteLine($"ChatHub: SendChatMessageHistory: messages={messages}, connectionId={connectionId}");
+            var curConnectionid = Context.ConnectionId;
+            if (curConnectionid == connectionId) return;
+
+            await Clients.Client(connectionId).RecieveMessageHistory(messages);
         }
         public async Task OnEnterChat(string author)
         {
+            Console.WriteLine($"ChatHub: OnEnterChat: author={author}");
             var connectionid = Context.ConnectionId;
             await Clients.All.RecieveOneConnected(new AuthorRegister
             {
@@ -29,8 +36,9 @@ namespace Chatroom.Hubs
                 ConnectionId = connectionid
             });
         }
-        public async Task SyncAuthors(string author)
+        public async Task SyncAuthor(string author)
         {
+            Console.WriteLine($"ChatHub: SyncAuthor: author={author}");
             var connectionid = Context.ConnectionId;
             await Clients.Others.RecieveOneSync(new AuthorRegister
             {
@@ -49,6 +57,7 @@ namespace Chatroom.Hubs
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             var connectionid = Context.ConnectionId;
+            Console.WriteLine($"ChatHub: OnDisconnectedAsync: connectionid={connectionid}");
             await Clients.Others.RecieveOneDisconnected(connectionid);
         }
     }

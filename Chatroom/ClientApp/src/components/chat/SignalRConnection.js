@@ -22,6 +22,13 @@ export function SetupMessageReciever(func){
     });
 }
 
+export function SetupMessageHistoryReciever(func) {
+    connection.on("RecieveMessageHistory", (update) => {
+        console.log("RecieveMessageHistory", update);
+        func(update);
+    });
+}
+
 export function SetupConnectedReciever(func) {
     connection.on("RecieveOneConnected", (update) => {
         console.log("RecieveOneConnected", update);
@@ -62,7 +69,13 @@ export function OnEnterChat(author) {
 }
 
 export function SyncAuthor(author) {
-    console.log("Syncing: ", author);
+    console.log("SyncAuthor: ", author);
 
-    connection.invoke("SyncAuthors", author);
+    connection.invoke("SyncAuthor", author);
+}
+
+export function SendChatMessageHistory(messageHistory, connectionId) {
+    console.log("SendChatMessageHistory: ", messageHistory, connectionId);
+
+    connection.invoke("SendChatMessageHistory", messageHistory, connectionId);
 }

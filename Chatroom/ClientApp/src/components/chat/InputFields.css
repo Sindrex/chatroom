@@ -6,3 +6,6 @@
     padding: 0 15px 15px 15px; /* standard edge margin (15px) */
     height: 150px; /* space for input height (38px) + bottom padding (15px) */
 }
+#right-align-text {
+    text-align: right;
+}

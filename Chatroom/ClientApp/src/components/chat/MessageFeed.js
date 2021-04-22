@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { SetupMessageReciever } from './SignalRConnection';
+import { SetupMessageReciever, SetupConnectedReciever, SetupMessageHistoryReciever, SendChatMessageHistory } from './SignalRConnection';
 
 import './MessageFeed.css'
 
@@ -15,13 +15,34 @@ export class MessageFeed extends Component {
     constructor() {
         super();
         SetupMessageReciever((update) => {
-            console.log("RecieveMessage inner", update);
             let messageList = this.state.messages;
             messageList.push(update);
             this.setState({
                 messages: messageList
             });
-            console.log(this.state.messages);
+            console.log("Messages", this.state.messages);
+        });
+        SetupConnectedReciever((update) => {
+            let messageList = this.state.messages;
+
+            messageList.push({
+                author: update.author,
+                message: "has arrived!"
+            });
+            this.setState({
+                messages: messageList
+            });
+            console.log("Messages", this.state.messages);
+
+            SendChatMessageHistory(messageList, update.connectionId)
+        });
+        SetupMessageHistoryReciever((update) => {
+            let messageList = this.state.messages;
+            messageList = update;
+            this.setState({
+                messages: messageList
+            });
+            console.log("Messages", this.state.messages);
         });
     }
 
@@ -29,7 +50,7 @@ export class MessageFeed extends Component {
         const messageList = this.state.messages.map((message, i) =>
             <li key={i}>
                 <Container fluid><Row>
-                    <Col md="auto"><div className="font-weight-bold">[{message.author}]:</div></Col>
+                    <Col xs={2}><div className="font-weight-bold">[{message.author}]:</div></Col>
                     <Col>{message.message}</Col>
                 </Row></Container>
             </li>
@@ -37,7 +58,6 @@ export class MessageFeed extends Component {
         return (
             <div id="messageFeed">
                 <ul className="list-unstyled">
-                    <li id="entrypoint"></li>
                     {messageList}
                 </ul>
             </div>

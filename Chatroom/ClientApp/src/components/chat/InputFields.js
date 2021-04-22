@@ -10,6 +10,10 @@ import './InputFields.css'
 export class InputFields extends Component {
     static displayName = InputFields.name;
 
+    constructor() {
+        super();
+    }
+
     render () {
         return (
             <div id="foot">
@@ -20,7 +24,7 @@ export class InputFields extends Component {
                                 <input type="text" id="author" className="form-control" placeholder="Your name here..." required/>
                             </Col>
                             <Col xs={6}>
-                                <input type="text" id="message" className="form-control" placeholder="Write a message and press Enter..." required />
+                                <input type="text" id="message" className="form-control" placeholder="Write a message and press Enter..." required/>
                             </Col>
                             <Col>
                                 <Button id="submit" type="submit" className="btn btn-primary">
@@ -39,7 +43,8 @@ export class InputFields extends Component {
         const author = document.getElementById("author").value;
         const messageInput = document.getElementById("message");
         const message = messageInput.value;
-        messageInput.value = "";
         SendMessage(e, author, message);
+
+        document.getElementById("message").value = "";
     }
 }

@@ -19,3 +19,6 @@ Add your Heroku API key (found in Account Settings) to the repo's secret keys by
 
 ## Heroku
 Create new [Heroku](https://dashboard.heroku.com/) App with a sensible name.
+
+## React
+For client, React was used.

@@ -1,5 +1,5 @@
 # The Chatroom
-ASP.NET Core SignalR chatroom solution (for learning reasons), setup with automatic deployment to Heroku at [The Chatroom](https://shpchatroom.herokuapp.com/WiredBrain.html). Solution is built to a docker image that is pushed to Heroku.
+ASP.NET Core SignalR chatroom solution (for learning reasons), setup with automatic deployment to Heroku at [The Chatroom](https://shpchatroom.herokuapp.com/). Solution is built to a docker image that is pushed to Heroku.
 
 # How it was setup
 ## SignalR

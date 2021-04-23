@@ -9,6 +9,7 @@ var connection = null;
 export function SetupConnection() {
     connection = new HubConnectionBuilder()
         .withUrl("/chathub")
+        .withAutomaticReconnect()
         .build();
 
     connection.start()

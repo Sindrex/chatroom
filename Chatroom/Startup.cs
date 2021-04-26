@@ -8,6 +8,7 @@ using JavaScriptEngineSwitcher.V8;
 using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using React.AspNet;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Chatroom.Helpers;
 
 //https://reactjs.net/tutorials/aspnetcore.html
 
@@ -32,6 +33,8 @@ namespace Chatroom
             {
                 c.EnableDetailedErrors = true;
             }); //.AddAzureSignalR();
+
+            services.AddSingleton<IState, State>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +66,7 @@ namespace Chatroom
                     pattern: "{controller}/{action=Index}/{id?}"
                 );
                 endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapHub<PlaceHub>("/placehub");
             });
 
             app.UseSpa(spa =>

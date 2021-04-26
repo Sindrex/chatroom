@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { SetupMessageReciever, SetupConnectedReciever, SetupMessageHistoryReciever, SendChatMessageHistory } from './SignalRConnection';
+import { SetupMessageReciever, SetupConnectedReciever, SetupMessageHistoryReciever, SendChatMessageHistory } from '../signalr/ChatConnection';
 
 import './MessageFeed.css'
 
@@ -49,10 +49,8 @@ export class MessageFeed extends Component {
     render() {
         const messageList = this.state.messages.map((message, i) =>
             <li key={i}>
-                <Container fluid><Row>
-                    <Col xs={2}><div className="font-weight-bold">[{message.author}]:</div></Col>
-                    <Col>{message.message}</Col>
-                </Row></Container>
+                <p className="font-weight-bold">[{message.author}]:</p>
+                <p>{message.message}</p>
             </li>
         );
         return (

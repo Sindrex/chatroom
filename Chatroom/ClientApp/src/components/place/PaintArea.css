@@ -1,0 +1,20 @@
+#colorsquare {
+    height: 25px;
+    width: 25px;
+    padding: 0px 0px 0px 0px;
+    border-width: 1px;
+    border-color: rgb(235, 235, 235);
+}
+
+#paintarea{
+    padding-top:50px;
+    height:50%;
+    width:100%;
+    margin:auto;
+}
+
+.col-md-auto {
+    padding: 0px 0px 0px 0px;
+    height: 25px;
+    width: 25px;
+}

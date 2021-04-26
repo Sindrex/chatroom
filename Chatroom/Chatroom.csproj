@@ -11,10 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="JavaScriptEngineSwitcher.Extensions.MsDependencyInjection" Version="3.3.0" />
     <PackageReference Include="JavaScriptEngineSwitcher.V8" Version="3.12.1" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.13" />
@@ -32,10 +28,12 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\components\chat\SignalRConnection.js" />
+    <None Remove="ClientApp\src\components\signalr\PlaceConnection.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="ClientApp\src\components\chat\SignalRConnection.js" />
+    <Content Include="ClientApp\src\components\signalr\PlaceConnection.js" />
+    <Content Include="ClientApp\src\components\signalr\ChatConnection.js" />
     <Content Include="ClientApp\src\components\chat\Chatroom.png" />
   </ItemGroup>
 

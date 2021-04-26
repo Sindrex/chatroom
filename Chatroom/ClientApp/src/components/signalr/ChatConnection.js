@@ -6,7 +6,7 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 
 var connection = null;
 
-export function SetupConnection() {
+export function SetupChatConnection() {
     connection = new HubConnectionBuilder()
         .withUrl("/chathub")
         .withAutomaticReconnect()

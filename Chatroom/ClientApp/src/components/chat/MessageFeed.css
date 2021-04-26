@@ -1,9 +1,9 @@
 #messageFeed {
     height: 60%;
-    width: 80%;
+    width: 100%;
     padding-bottom: 50px;
     padding-top: 50px;
-    padding-left: 15px;
+    padding-left: 0px;
     display: flex;
     flex-direction: column-reverse;
     margin: auto;
@@ -12,4 +12,15 @@
 
 div.font-weight-bold {
     text-align: right;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
+p {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
 }

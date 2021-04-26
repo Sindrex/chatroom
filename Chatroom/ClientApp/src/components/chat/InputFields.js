@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SendMessage, SetupConnectedReciever, SyncAuthor, OnEnterChat } from './SignalRConnection';
+import { SendMessage, SetupConnectedReciever, SyncAuthor, OnEnterChat } from '../signalr/ChatConnection';
 import Container from 'react-bootstrap/Container';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -29,10 +29,8 @@ export class InputFields extends Component {
                 <div id="foot">
                     <form onSubmit={this.OnSendMessage} autoComplete="off">
                         <Container fluid>
+                            <div className="font-weight-bold" id="left-align-text">[{this.state.author}]:</div>
                             <Row className="align-items-center">
-                                <Col xs={2}>
-                                    <div className="font-weight-bold" id="right-align-text">[{this.state.author}]:</div>
-                                </Col>
                                 <Col>
                                     <input type="text" id="message" className="form-control" value={this.state.messageVal} onChange={(e) => {
                                             this.setState({
@@ -41,7 +39,7 @@ export class InputFields extends Component {
                                         }}
                                         placeholder="Write a message and press Enter..." maxLength="140" required />
                                 </Col>
-                                <Col md="auto">
+                                <Col xs={1}>
                                     <Button id="submit" type="submit" className="btn btn-primary">
                                         Send
                                     </Button>
@@ -65,7 +63,7 @@ export class InputFields extends Component {
                                         });
                                     }} placeholder="Your name here..." maxLength="18" required />
                                 </Col>
-                                <Col md="auto">
+                                <Col xs={1}>
                                     <Button id="submit" type="submit" className="btn btn-primary">
                                         Send
                                     </Button>

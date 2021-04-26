@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Row from "react-bootstrap/Row";
-import { SetupConnectedReciever, SetupSyncReciever, SetupDisconnectedReciever } from './SignalRConnection';
+import { SetupConnectedReciever, SetupSyncReciever, SetupDisconnectedReciever } from '../signalr/ChatConnection';
 
 import './OnlineTracker.css'
 

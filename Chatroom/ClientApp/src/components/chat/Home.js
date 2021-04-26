@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MessageFeed } from './MessageFeed';
 import { InputFields } from './InputFields';
 import { OnlineTracker } from './OnlineTracker';
-import { SetupConnection } from './SignalRConnection';
+import { SetupChatConnection } from '../signalr/ChatConnection';
 import Container from 'react-bootstrap/Container';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -15,14 +15,15 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        SetupConnection();
+        SetupChatConnection();
     }
 
     render () {
         return (
             <Container fluid>
                 <Row>
-                    <Col md="auto">
+                    <Col xs={2} id="leftsidebar">
+                        <a href="/place">THE PLACE</a>
                         <OnlineTracker/>
                     </Col>
                     <Col>
@@ -36,8 +37,7 @@ export class Home extends Component {
                             <InputFields/>
                         </div>
                     </Col>
-                    <Col md="auto">
-                        
+                    <Col xs={2}>
                     </Col>
                 </Row>
             </Container>

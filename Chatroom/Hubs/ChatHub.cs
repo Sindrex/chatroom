@@ -20,8 +20,8 @@ namespace Chatroom.Hubs
         }
         public async Task SendChatMessageHistory(ChatMessage[] messages, string connectionId)
         {
-            Console.WriteLine($"ChatHub: SendChatMessageHistory: messages={messages}, connectionId={connectionId}");
             var curConnectionid = Context.ConnectionId;
+            Console.WriteLine($"ChatHub: SendChatMessageHistory: messages={messages}, connectionId={connectionId} from connectionid={curConnectionid}");
             if (curConnectionid == connectionId) return;
 
             await Clients.Client(connectionId).RecieveMessageHistory(messages);

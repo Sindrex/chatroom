@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Row from "react-bootstrap/Row";
 import { SetupConnectedReciever, SetupSyncReciever, SetupDisconnectedReciever } from '../signalr/ChatConnection';
 
 import './OnlineTracker.css'
@@ -50,12 +49,10 @@ export class OnlineTracker extends Component {
         );
         return (
             <div id="onlineTracker">
-                <Row>Online:</Row>
-                <Row>
-                    <ul className="list-unstyled">
-                        {onlineList}
-                    </ul>
-                </Row>
+                <p>Online:</p>
+                <ul className="list-unstyled">
+                    {onlineList}
+                </ul>
             </div>
         );
     }

@@ -1,6 +1,9 @@
 #onlineTracker {
     margin-top: 50px;
-    padding-left:15px;
+    height: 20%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 10px;
 }
 
 #left-align-text {

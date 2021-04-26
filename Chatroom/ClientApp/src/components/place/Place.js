@@ -25,7 +25,7 @@ export class Place extends Component {
         SetupPlaceConnection();
     }
 
-    render () {
+    render() {
         return (
             <Container fluid>
                 <Row>
@@ -44,7 +44,7 @@ export class Place extends Component {
                         </div>
                     </Col>
                     <Col xs={2}>
-                        <ColorPicker handleChange={this.onColorChange} />
+                        <ColorPicker color={this.state.color} handleChange={this.onColorChange} />
                     </Col>
                 </Row>
             </Container>
@@ -53,5 +53,26 @@ export class Place extends Component {
 
     onColorChange = (color) => {
         this.setState({ color: color.hex });
+    }
+
+    pipetteSetColorRGB = ({ r, g, b }) => {
+        let hexChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+        let factor = 16;
+
+        let hexRes = "#";
+
+        //red
+        hexRes += hexChars[Math.floor(r / factor)];
+        hexRes += hexChars[Math.floor(r % factor * factor)];
+
+        //green
+        hexRes += hexChars[Math.floor(g / factor)];
+        hexRes += hexChars[Math.floor(g % factor * factor)];
+
+        //blue
+        hexRes += hexChars[Math.floor(b / factor)];
+        hexRes += hexChars[Math.floor(b % factor * factor)];
+
+        this.setState({ color: hexRes });
     }
 }

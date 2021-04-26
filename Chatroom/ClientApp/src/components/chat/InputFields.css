@@ -4,7 +4,7 @@
     margin-right: auto;
     width: 100%; /* 100% of page width */
     padding: 0 0px 0px 0px; /* standard edge margin (15px) */
-    height: 150px; /* space for input height (38px) + bottom padding (15px) */
+    height: 100px; /* space for input height (38px) + bottom padding (15px) */
 }
 #right-align-text {
     text-align: right;

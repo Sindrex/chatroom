@@ -6,7 +6,7 @@ import './ColorPicker.css'
 export class ColorPicker extends Component {
     static displayName = ColorPicker.name;
     state = {
-        color: "#000000"
+        color: '#000000'
     }
 
     render() {
@@ -23,6 +23,7 @@ export class ColorPicker extends Component {
 
     handleChange = (color) => {
         this.setState({ color: color.hex });
+        //this.props.handleChange(color);
     };
 
     handleChangeComplete = (color) => {

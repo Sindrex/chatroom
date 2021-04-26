@@ -1,13 +1,11 @@
 #messageFeed {
     height: 60%;
     width: 100%;
-    padding-bottom: 50px;
-    padding-top: 50px;
+    margin-top: 50px;
     padding-left: 0px;
     display: flex;
     flex-direction: column-reverse;
-    margin: auto;
-    overflow: hidden;
+    overflow:hidden;
 }
 
 div.font-weight-bold {

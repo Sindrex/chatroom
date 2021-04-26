@@ -23,7 +23,6 @@ namespace Chatroom.Hubs
             var colorArr = _state.GetState();
             colorArr[message.x][message.y] = message.Hex;
             _state.SetState(colorArr);
-            Console.WriteLine("PlaceHub: \n" + ToString(colorArr));
             await Clients.Others.RecieveColor(message);
         }
 
